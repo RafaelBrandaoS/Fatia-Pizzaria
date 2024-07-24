@@ -4,13 +4,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 DB_HOST = os.getenv('DB_HOST')
-DB_USUARIO = os.getenv('DB_USUARIO')
-DB_BANCO = os.getenv('DB_BANCO')
 DB_PORTA = os.getenv('DB_PORTA')
+DB_SENHA = os.getenv('DB_SENHA')
+DB_USUARIO = os.getenv('DB_USUARIO')
 
 
 def criar_conexao():
-    return connect(host=DB_HOST, user=DB_USUARIO, password='', database=DB_BANCO, port=DB_PORTA)
+    print(DB_HOST, DB_SENHA, DB_PORTA, DB_USUARIO)
+    return connect(host=DB_HOST, password=DB_SENHA, user=DB_USUARIO, database='fatiaPizzaria', port=DB_PORTA)
 
 
 def fexar_conexão(con):

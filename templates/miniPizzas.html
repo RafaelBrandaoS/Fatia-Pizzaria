@@ -43,9 +43,9 @@
             <a href="{{ url_for('bebidas') }}">BEBIDAS</a>
         </section>
         <section class="catalogo">
-            <h2>pizzas tradicionais</h2>
-            {% for pizza in pizzas %}
-                {% if pizza[4] == 'tradicional' %}
+            <h2>mini pizzas tradicionais</h2>
+            {% for pizza in minipizza %}
+                {% if pizza[4] == 'tradicional 15cm' %}
                 <div class="produto">
                     <img src="{{ url_for('static', filename=pizza[3]) }}" alt="{{ pizza[1]}}">
                     <div class="dados-produto">
@@ -55,9 +55,9 @@
                 </div>
                 {% endif %}
             {% endfor %}
-            <h2>pizzas doces</h2>
-            {% for pizza in pizzas %}
-                {% if pizza[4] == 'doces' %}
+            <h2>mini pizzas doces</h2>
+            {% for pizza in minipizza %}
+                {% if pizza[4] == 'doces 15cm' %}
                 <div class="produto">
                     <img src="{{ url_for('static', filename=pizza[3]) }}" alt="{{ pizza[1]}}">
                     <div class="dados-produto">

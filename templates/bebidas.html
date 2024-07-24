@@ -42,33 +42,16 @@
             <a href="{{ url_for('minipizzas') }}">MINI PIZZA</a>
             <a href="{{ url_for('bebidas') }}">BEBIDAS</a>
         </section>
-        <section class="catalogo">
-            <h2>pizzas tradicionais</h2>
-            {% for pizza in pizzas %}
-                {% if pizza[4] == 'tradicional' %}
+        <section class="catalogo c-bebidas">
+            <h2>bebidas</h2>
+            {% for bebida in bebidas %}
                 <div class="produto">
-                    <img src="{{ url_for('static', filename=pizza[3]) }}" alt="{{ pizza[1]}}">
+                    <img src="{{ url_for('static', filename=bebida[3]) }}" alt="{{ bebida[1]}}">
                     <div class="dados-produto">
-                        <h3 class="nome-produto">{{ pizza[1] }}</h3>
-                        <p>R$ <span class="preco-produto">{{ pizza[2] }}</span> un.</p>
+                        <h3 class="nome-produto">{{ bebida[1] }}</h3>
+                        <p>R$ <span class="preco-produto">{{ bebida[2] }}</span> un.</p>
                     </div>
                 </div>
-                {% endif %}
-            {% endfor %}
-            <h2>pizzas doces</h2>
-            {% for pizza in pizzas %}
-                {% if pizza[4] == 'doces' %}
-                <div class="produto">
-                    <img src="{{ url_for('static', filename=pizza[3]) }}" alt="{{ pizza[1]}}">
-                    <div class="dados-produto">
-                        <h3 class="nome-produto">{{ pizza[1] }}</h3>
-                        <p>R$ <span class="preco-produto">{{ pizza[2] }}</span> un.</p>
-                        <div class="butoes-produto">
-                            <button class="carrinho-add"><span class="material-symbols-outlined">add_shopping_cart</span></button>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
             {% endfor %}
         </section>
     </main>
