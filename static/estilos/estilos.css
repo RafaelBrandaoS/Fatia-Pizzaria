@@ -243,6 +243,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: 0 auto;
+    text-align: center;
     gap: 5px;
     width: 40%;
 }

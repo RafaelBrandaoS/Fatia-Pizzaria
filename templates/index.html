@@ -42,7 +42,7 @@
             <a class="nav-link" href="{{ url_for('bebidas') }}" data-section="bebidas">BEBIDAS</a>
         </nav>
         <section class="catalogo">
-            <div class="section" id="pizzas">
+            <div class="section pizzas" id="pizzas">
                 <h2>pizzas tradicionais</h2>
                 {% for pizza in pizzas %}
                     {% if pizza[4] == 'tradicional' %}

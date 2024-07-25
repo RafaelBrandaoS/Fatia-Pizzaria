@@ -1,8 +1,4 @@
-if (document.readyState == "loading") {
-    document.addEventListener("DOMContentLoaded", eventos)
-} else {
-    eventos()
-}
+document.addEventListener("DOMContentLoaded", eventos) 
 
 function eventos() {
     // conteúdo dinamico
@@ -19,6 +15,10 @@ function eventos() {
     }
 
     /* produtos */
+    clickProduto()
+}
+
+function clickProduto() {
     const produto = document.getElementsByClassName('produto')
     for (var i = 0; i < produto.length; i++) {
         produto[i].addEventListener("click", mostrar_detalhes)
@@ -36,6 +36,7 @@ function carregarSessao(section) {
                 sections[i].style.display = 'none'
             };
             document.getElementById(section).style.display = 'flex';
+            clickProduto()
         })
         .catch(error => console.error('Erro ao carregar a seção:', error));
         
@@ -51,34 +52,49 @@ function mostrar_detalhes(event) {
     for (var i = 0; i < ex.length; i++) {
         ex[i].remove()
     }
-
+    const catalogo = document.getElementsByClassName('section')[0]
     let detalhes = document.createElement('div')
-    detalhes.innerHTML = `
-    <span class="material-symbols-outlined fexar-detalhes">close</span>
-    <div>
-        <img src="${img}" alt="calabresa">
-        <div class="conteudo">
-            <div class="dados">
-                <h3 class="nome-produto">Pizza de ${nome}</h3>
-                <p>R$ <span class="preco-produto">${preco}</span> un.</p>
-                <a href="#"><span class="material-symbols-outlined">shopping_cart</span></a>
+    if (catalogo.classList.contains('pizzas')){
+        detalhes.innerHTML = `
+        <span class="material-symbols-outlined fexar-detalhes">close</span>
+        <div>
+            <img src="${img}" alt="calabresa">
+            <div class="conteudo">
+                <div class="dados">
+                    <h3 class="nome-produto">Pizza de ${nome}</h3>
+                    <p>R$ <span class="preco-produto">${preco}</span> un.</p>
+                    <a href="#"><span class="material-symbols-outlined">shopping_cart</span></a>
+                </div>
+                <form action="" class="borda">
+                    <h4>Selecione a borda</h4>
+                    <label for="nenhuma"><input checked type="checkbox" name="nenhuma" id="nenhuma"> Nenhuma</label>
+                    <label for="chedar"><input type="checkbox" name="chedar" id="chedar"> Chedar</label>
+                    <label for="catupiry"><input type="checkbox" name="catupiry" id="catupiry"> Catupiry</label>
+                </form>
             </div>
-            <form action="" class="borda">
-                <h4>Selecione a borda</h4>
-                <label for="nenhuma"><input checked type="checkbox" name="nenhuma" id="nenhuma"> Nenhuma</label>
-                <label for="chedar"><input type="checkbox" name="chedar" id="chedar"> Chedar</label>
-                <label for="catupiry"><input type="checkbox" name="catupiry" id="catupiry"> Catupiry</label>
-            </form>
         </div>
-    </div>
-    `
+        `
+    } else {
+        detalhes.innerHTML = `
+        <span class="material-symbols-outlined fexar-detalhes">close</span>
+        <div>
+            <img src="${img}" alt="calabresa">
+            <div class="conteudo">
+                <div class="dados">
+                    <h3 class="nome-produto">Pizza de ${nome}</h3>
+                    <p>R$ <span class="preco-produto">${preco}</span> un.</p>
+                    <a href="#"><span class="material-symbols-outlined">shopping_cart</span></a>
+                </div>
+            </div>
+        </div>
+        `
+    }
     detalhes.classList.add('detalhes')
     let fexar = detalhes.getElementsByClassName('fexar-detalhes')[0]
     fexar.addEventListener("click", () => {
         detalhes.remove()
     })
 
-    const catalogo = document.querySelector('.catalogo > div')
     catalogo.append(detalhes)
 }
 // const btnAdicionar = document.getElementsByClassName('carrinho-add')
