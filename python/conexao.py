@@ -10,7 +10,6 @@ DB_USUARIO = os.getenv('DB_USUARIO')
 
 
 def criar_conexao():
-    print(DB_HOST, DB_SENHA, DB_PORTA, DB_USUARIO)
     return connect(host=DB_HOST, password=DB_SENHA, user=DB_USUARIO, database='fatiaPizzaria', port=DB_PORTA)
 
 

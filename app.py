@@ -9,8 +9,19 @@ def home():
     pizzas = listaPizzas()
     return render_template('index.html', pizzas=pizzas)
 
-@app.route('/miniPizza')
-def minipizzas():
+@app.route('/carrinho')
+def carrinho():
+    " mostra o carrinho "
+    return render_template('carrinho.html')
+
+@app.route('/pizzas')
+def pizzas():
+    " página das mini pizzas "
+    pizzas = listaPizzas()
+    return render_template('pizzas.html', pizzas=pizzas)
+
+@app.route('/miniPizzas')
+def miniPizzas():
     " página das mini pizzas "
     minipizza = listaMiniPizza()
     return render_template('miniPizzas.html', minipizza=minipizza)
