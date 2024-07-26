@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/carrinho.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <title>Fatia Pizzaria - carrinho</title>
 </head>
@@ -26,8 +27,34 @@
         </div>
     </header>
     <main>
-        <section>
-            <h2>CARRINHO</h2>
+        <section class="produtos-carrinho">
+            <h2 class="titulo">CARRINHO</h2>
+            <div class="carrinho-container">
+                <img src="{{ url_for('static', filename='imagens/produtos/pizzas/calabresa.jpg') }}" alt="Img produto">
+                <div class="dados-produto">
+                    <h3>Nome do produto</h3>
+                    <p>R$<span>31.99</span></p>
+                    <label for="qtd" class="qtd-itens">Quantidade: <input value="1" min="1" type="number" name="qtd" id="qtd"></label>
+                </div>
+                <button class="remover">remover</button>
+            </div>
+            <div class="carrinho-container">
+                <img src="{{ url_for('static', filename='imagens/produtos/pizzas/bacon.jpg') }}" alt="Img produto">
+                <div class="dados-produto">
+                    <h3>Nome do produto</h3>
+                    <p>R$<span>31.99</span></p>
+                    <label for="qtd" class="qtd-itens">Quantidade: <input value="1" min="1" type="number" name="qtd" id="qtd"></label>
+                </div>
+                <button class="remover">remover</button>
+            </div>
+        </section>
+        <section class="finalizar-carrinho">
+            <div class="dados-finais">
+                <h3>Total: R$<span>100.00</span></h3>
+                <label for="endereco">Endereço da entrega:</label>
+                <input type="text" name="endereco" id="endereco" placeholder="digite o endereço da entrega">
+            </div>
+            <button class="finalizar">Finalizar</button>
         </section>
     </main>
     <footer>
