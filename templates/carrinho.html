@@ -29,28 +29,24 @@
     <main>
         <section class="produtos-carrinho">
             <h2 class="titulo">CARRINHO</h2>
+            {% for item in itens %}
             <div class="carrinho-container">
-                <img src="{{ url_for('static', filename='imagens/produtos/pizzas/calabresa.jpg') }}" alt="Img produto">
+                <img src="{{ item['img'] }}" alt="Img produto">
                 <div class="dados-produto">
-                    <h3>Nome do produto</h3>
-                    <p>R$<span>31.99</span></p>
-                    <label for="qtd" class="qtd-itens">Quantidade: <input value="1" min="1" type="number" name="qtd" id="qtd"></label>
+                    <h3>{{ item['nome'] }}</h3>
+                    <p>R$<span>{{ item['preco'] }}</span></p>
+                    {% if item['borda'] %}
+                        <p>com borda de {{ item['borda'] }}</p>
+                    {% endif %}
+                    <label for="qtd" class="qtd-itens">Quantidade: <input value="{{ item['quantidade'] }}" min="1" type="number" class="qtd" name="qtd" id="qtd"></label>
                 </div>
                 <button class="remover">remover</button>
             </div>
-            <div class="carrinho-container">
-                <img src="{{ url_for('static', filename='imagens/produtos/pizzas/bacon.jpg') }}" alt="Img produto">
-                <div class="dados-produto">
-                    <h3>Nome do produto</h3>
-                    <p>R$<span>31.99</span></p>
-                    <label for="qtd" class="qtd-itens">Quantidade: <input value="1" min="1" type="number" name="qtd" id="qtd"></label>
-                </div>
-                <button class="remover">remover</button>
-            </div>
+            {% endfor %}
         </section>
         <section class="finalizar-carrinho">
             <div class="dados-finais">
-                <h3>Total: R$<span>100.00</span></h3>
+                <h3>Total: R$<span id="total">00.00</span></h3>
                 <label for="endereco">Endereço da entrega:</label>
                 <input type="text" name="endereco" id="endereco" placeholder="digite o endereço da entrega">
             </div>
@@ -70,6 +66,6 @@
         </div>
         <p>site criado por <a href="https://www.instagram.com/fael.bs7" target="_blank">Rafael Brandão</a></p>
     </footer>
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/carrinho.js') }}"></script>
 </body>
 </html>

@@ -18,6 +18,7 @@ function eventos() {
     clickProduto()
 }
 
+
 function clickProduto() {
     const produto = document.getElementsByClassName('produto')
     for (var i = 0; i < produto.length; i++) {
@@ -43,7 +44,6 @@ function carregarSessao(section) {
 }
 
 function mostrar_detalhes(event) {
-    console.log('clicou!!!')
     let btn = event.currentTarget
     let nome = btn.getElementsByClassName('nome-produto')[0].innerText
     let preco = btn.getElementsByClassName('preco-produto')[0].innerText
@@ -61,15 +61,14 @@ function mostrar_detalhes(event) {
             <img src="${img}" alt="calabresa">
             <div class="conteudo">
                 <div class="dados">
-                    <h3 class="nome-produto">Pizza de ${nome}</h3>
+                    <h3>Pizza de <span class="nome-produto">${nome}</span></h3>
                     <p>R$ <span class="preco-produto">${preco}</span> un.</p>
-                    <a href="#"><span class="material-symbols-outlined">shopping_cart</span></a>
+                    <button class="adicionar-carrinho"><span class="material-symbols-outlined">shopping_cart</span></button>
                 </div>
                 <form action="" class="borda">
                     <h4>Selecione a borda</h4>
-                    <label for="nenhuma"><input checked type="checkbox" name="nenhuma" id="nenhuma"> Nenhuma</label>
-                    <label for="chedar"><input type="checkbox" name="chedar" id="chedar"> Chedar</label>
-                    <label for="catupiry"><input type="checkbox" name="catupiry" id="catupiry"> Catupiry</label>
+                    <label for="chedar"><input class="opcao" type="checkbox" name="chedar" id="chedar"> Chedar</label>
+                    <label for="catupiry"><input class="opcao" type="checkbox" name="catupiry" id="catupiry"> Catupiry</label>
                 </form>
             </div>
         </div>
@@ -81,9 +80,9 @@ function mostrar_detalhes(event) {
             <img src="${img}" alt="calabresa">
             <div class="conteudo">
                 <div class="dados">
-                    <h3 class="nome-produto">Pizza de ${nome}</h3>
+                    <h3>Pizza de <span class="nome-produto">${nome}</span></h3>
                     <p>R$ <span class="preco-produto">${preco}</span> un.</p>
-                    <a href="#"><span class="material-symbols-outlined">shopping_cart</span></a>
+                    <button class="adicionar-carrinho"><span class="material-symbols-outlined">shopping_cart</span></button>
                 </div>
             </div>
         </div>
@@ -95,8 +94,67 @@ function mostrar_detalhes(event) {
         detalhes.remove()
     })
 
+    if (catalogo.classList.contains('pizzas')) {
+        const opcoes = detalhes.getElementsByClassName('opcao')
+        for (var i = 0; i < opcoes.length; i++) {
+            opcoes[i].addEventListener('change', function () {
+                if (this.checked) {
+                    for (var i = 0; i < opcoes.length; i++) {
+                        if (opcoes[i] !== this) {
+                            opcoes[i].checked = false;
+                        }
+                    };
+                }
+            });
+        }
+    }
+
+    let adicionar = detalhes.getElementsByClassName('adicionar-carrinho')[0]
+    adicionar.addEventListener("click", adicionarAoCarrinho)
+
     catalogo.append(detalhes)
 }
+
+function adicionarAoCarrinho(event) {
+    const catalogo = document.getElementsByClassName('section')[0]
+    const btn = event.target
+    const div = btn.parentElement.parentElement.parentElement
+    const img = div.getElementsByTagName('img')[0].src
+    const nome = div.getElementsByClassName('nome-produto')[0].innerText
+    let preco = div.getElementsByClassName('preco-produto')[0].innerText
+    preco = +preco
+    let borda = null
+    if (catalogo.classList.contains('pizzas')) {
+        const opcoes = div.getElementsByClassName('opcao')
+        for (var i = 0; i < opcoes.length; i++) {
+            if (opcoes[i].checked) {
+                borda = opcoes[i].parentElement.innerText
+                preco += 5
+            }
+        }
+    }
+    preco = preco.toFixed(2)
+
+    const dados = {'nome': nome, 'img': img, 'preco': preco, 'borda': borda, 'quantidade': 1}
+
+    fetch('/carrinhoAdd', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    })
+    .then(response => response.text())
+    .catch(error => console.error('Error:', error))
+
+    div.parentElement.remove();
+    
+    alert('Adicionado ao carrinho')
+}
+
+
+
+
 // const btnAdicionar = document.getElementsByClassName('carrinho-add')
     // for (var i = 0; i < btnAdicionar.length; i++) {
     //     btnAdicionar[i].addEventListener("click", adicionarAoCarrinho)
