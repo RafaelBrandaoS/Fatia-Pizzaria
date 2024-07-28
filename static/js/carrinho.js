@@ -10,6 +10,11 @@ function eventos() {
     }
 
     clickRemove()
+
+    const btn_finalizar = document.getElementById('finalizar')
+    btn_finalizar.addEventListener("click", () => {
+        alert('Ops, Infelizmente estamos fexados!')
+    })
 }
 
 function clickRemove() {
